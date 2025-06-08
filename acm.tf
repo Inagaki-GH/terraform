@@ -1,5 +1,6 @@
 # ACM証明書の作成
 # HTTPS通信に使用するSSL/TLS証明書
+# 注意: 実際のドメイン名をvariables.tfで設定する必要があります
 resource "aws_acm_certificate" "main" {
   domain_name       = var.domain_name        # 証明書のドメイン名
   validation_method = "DNS"                  # DNS検証方式を使用
@@ -14,6 +15,8 @@ resource "aws_acm_certificate" "main" {
 }
 
 # Route53のホストゾーン情報を取得
+# 注意: このデータソースはドメインがすでにRoute53で管理されていることを前提としています
+# terraform applyを実行する前に、Route53でドメインを購入または登録し、ホストゾーンを作成しておく必要があります
 data "aws_route53_zone" "main" {
   name         = var.domain_name             # ドメイン名に一致するホストゾーン
   private_zone = false                       # パブリックホストゾーン

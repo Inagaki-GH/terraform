@@ -62,10 +62,12 @@ variable "private_subnet_cidrs" {
 }
 
 # アプリケーションのドメイン名（ACM証明書とRoute53に使用）
+# 注意: このドメインはRoute53で管理されている必要があります
+# terraform applyを実行する前に、実際に所有しているドメインに変更してください
 variable "domain_name" {
   description = "Domain name for the application"
   type        = string
-  default     = "example.com"
+  default     = "example.com"  # 実際のドメインに変更してください
 }
 
 # ECRリポジトリ名
